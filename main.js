@@ -61,8 +61,8 @@ const productList = [
 for (let i = 0; i < priceTags.length; i++) {
   priceTags[i].innerHTML =
     `${(sale < 1 && productList[i].sale) ? 'Стоимость: <span style="text-decoration: line-through">'
-      + Math.floor(productList[i].price * 1.2 / ua * byn) + ' руб.</span>' + Math.floor(productList[i].price * 1.2 / ua * byn * sale) + ' руб.'
-       : Math.floor(productList[i].price * 1.2 / ua * byn) + 'руб.'}`;
+      + Math.floor(productList[i].price * 1.2 / ua * byn) + ' руб.</span> ' + Math.floor(productList[i].price * 1.2 / ua * byn * sale) + ' руб.'
+       : Math.floor(productList[i].price * 1.2 / ua * byn) + ' руб.'}`;
 }
 
 const demoVideoBtns = document.querySelectorAll('.btn-demoVideo');
