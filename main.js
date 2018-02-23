@@ -4,8 +4,8 @@ const btnHousehold = document.querySelector('.forHousehold');
 const sectionForWoman = document.querySelector('.sectionForWoman');
 const sectionForHousehold = document.querySelector('.sectionForHousehold');
 const header = document.querySelector('.header-text');
-const saleForWomen = true;
-const saleForHousehold = false;
+const saleForWomen = [true, 0.8];
+const saleForHousehold = [true, 0.9];
 
 header.innerHTML = 'Нажми на кнопочку выше &uarr;';
 
@@ -24,12 +24,12 @@ btnHousehold.addEventListener('click', () => {
 
 const ua = 26;
 const byn = 2;
-const sale = 0.85;
+// const sale = 0.85;
 
-function showSale(isSale) {
+function showSale(sale) {
   const saleTitle = document.querySelector('.showSale');
-  (isSale && sale < 1) ? saleTitle.innerHTML = `Цены указаны акционные
-    (-${Math.round((1 - sale)* 100)}%).
+  sale[0] ? saleTitle.innerHTML = `Цены указаны акционные
+    (-${Math.round((1 - sale[1])* 100)}%).
     Время действия ограничено.` : saleTitle.innerHTML = '';
 }
 
@@ -60,8 +60,8 @@ const productList = [
 
 for (let i = 0; i < priceTags.length; i++) {
   priceTags[i].innerHTML =
-    `${(sale < 1 && productList[i].sale) ? 'Стоимость: <span style="text-decoration: line-through">'
-      + Math.floor(productList[i].price * 1.2 / ua * byn) + ' руб.</span> ' + Math.floor(productList[i].price * 1.2 / ua * byn * sale) + ' руб.'
+    `${(productList[i].sale[0]) ? 'Стоимость: <span style="text-decoration: line-through">'
+      + Math.floor(productList[i].price * 1.2 / ua * byn) + ' руб.</span> ' + Math.floor(productList[i].price * 1.2 / ua * byn * productList[i].sale[1]) + ' руб.'
        : Math.floor(productList[i].price * 1.2 / ua * byn) + ' руб.'}`;
 }
 
