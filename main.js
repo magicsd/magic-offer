@@ -5,21 +5,29 @@ const sectionForWoman = document.querySelector('.sectionForWoman');
 const sectionForHousehold = document.querySelector('.sectionForHousehold');
 const header = document.querySelector('.header-text');
 
+header.innerHTML = 'Нажми на кнопочку выше &uarr;';
+
 btnWoman.addEventListener('click', () => {
   sectionForWoman.style.display = 'block';
   sectionForHousehold.style.display = 'none';
   header.innerHTML = 'Что подарить любимой даме';
+  showSale();
 });
 btnHousehold.addEventListener('click', () => {
   sectionForWoman.style.display = 'none';
   sectionForHousehold.style.display = 'block';
   header.innerHTML = 'Удобную чистоту в каждый дом';
+  showSale();
 });
 
 const ua = 26;
 const byn = 2;
 const sale = 0.85;
-if (sale < 1) document.querySelector('#disclaimer').innerHTML = `Цены указаны акционные (-${Math.round((1 - sale)* 100)}%). Время действия ограничено.`
+
+function showSale() {
+  if (sale < 1)  document.querySelector('.showSale')
+    .innerHTML = `Цены указаны акционные (-${Math.round((1 - sale)* 100)}%). Время действия ограничено.`
+}
 
 class Product {
   constructor(name, price) {
@@ -42,12 +50,13 @@ const productList = [
 
   new Product('Гель для духовки', 200.73),
   new Product('LOC универсальный', 194.69),
-  new Product('Dish Drops', 223,96),
+  new Product('Dish Drops', 223.96),
 ];
 
 for (let i = 0; i < priceTags.length; i++) {
   priceTags[i].innerHTML =
-    `Стоимость: ${(sale < 1) ? '<span style="text-decoration: line-through">' + Math.floor(productList[i].price * 1.2 / ua * byn) + ' руб.</span>' : ''}
+    `Стоимость: ${(sale < 1) ? '<span style="text-decoration: line-through">'
+      + Math.floor(productList[i].price * 1.2 / ua * byn) + ' руб.</span>' : ''}
       ${Math.floor(productList[i].price * 1.2 / ua * byn * sale)} руб.`;
 }
 
