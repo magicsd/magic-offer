@@ -145,10 +145,14 @@ li {
 
 
 .row {
-  border: 1px solid #ddd;
+  border: 0px solid #ddd;
   padding: 1rem;
   max-width: 114rem;
-  margin: 0 auto; }
+  margin: 0 auto;
+  box-shadow: 0 0.2rem 2rem rgba(0, 0, 0, 0.15);
+}
+
+
   .row:not(:last-child) {
     margin-bottom: 3rem;
   }
