@@ -9,29 +9,12 @@ const saleForHousehold = [true, 0.9];
 
 header.innerHTML = 'Нажми на кнопочку выше &uarr;';
 
-btnWoman.addEventListener('click', () => {
-  sectionForWoman.style.display = 'block';
-  sectionForHousehold.style.display = 'none';
-  header.innerHTML = 'Что подарить любимой даме';
-  showSale(saleForWomen);
-});
-btnHousehold.addEventListener('click', () => {
-  sectionForWoman.style.display = 'none';
-  sectionForHousehold.style.display = 'block';
-  header.innerHTML = 'Удобную чистоту в каждый дом';
-  showSale(saleForHousehold);
-});
+btnWoman.addEventListener('click', openForWomen);
+btnHousehold.addEventListener('click', openForHousehold);
 
 const ua = 26;
 const byn = 2;
 // const sale = 0.85;
-
-function showSale(sale) {
-  const saleTitle = document.querySelector('.showSale');
-  sale[0] ? saleTitle.innerHTML = `Цены указаны акционные
-    (-${Math.round((1 - sale[1])* 100)}%).
-    Время действия ограничено.` : saleTitle.innerHTML = '';
-}
 
 class Product {
   constructor(name, price, sale) {
@@ -70,3 +53,28 @@ const demoVideoBtns = document.querySelectorAll('.btn-demoVideo');
 demoVideoBtns[0].addEventListener('click', () => {window.open('https://www.youtube.com/watch?v=qWnfd6kBzTI', '_blank')}); // 0014
 demoVideoBtns[1].addEventListener('click', () => {window.open('https://www.youtube.com/watch?v=Ek2t9rtHFT4', '_blank')}); // 0001
 demoVideoBtns[2].addEventListener('click', () => {window.open('https://www.youtube.com/watch?v=bvDPjUTnk3E', '_blank')}); // Dish Drops
+
+function openForWomen() {
+  sectionForWoman.style.display = 'block';
+  sectionForHousehold.style.display = 'none';
+  header.innerHTML = 'Что подарить любимой даме';
+  showSale(saleForWomen);
+  this.setAttribute('style', 'box-shadow: 0 0.5rem 1rem rgba(250, 178, 100, 0.6);');
+  btnHousehold.removeAttribute('style');
+}
+
+function openForHousehold() {
+  sectionForWoman.style.display = 'none';
+  sectionForHousehold.style.display = 'block';
+  header.innerHTML = 'Удобную чистоту в каждый дом';
+  showSale(saleForHousehold);
+  this.setAttribute('style', 'box-shadow: 0 0.5rem 1rem rgba(250, 178, 100, 0.6);');
+  btnWoman.removeAttribute('style');
+}
+
+function showSale(sale) {
+  const saleTitle = document.querySelector('.showSale');
+  sale[0] ? saleTitle.innerHTML = `Цены указаны акционные
+    (-${Math.round((1 - sale[1])* 100)}%).
+    Время действия ограничено.` : saleTitle.innerHTML = '';
+}
