@@ -4,6 +4,8 @@ const btnHousehold = document.querySelector('.forHousehold');
 const sectionForWoman = document.querySelector('.sectionForWoman');
 const sectionForHousehold = document.querySelector('.sectionForHousehold');
 const header = document.querySelector('.header-text');
+const saleForWomen = true;
+const saleForHousehold = false;
 
 header.innerHTML = 'Нажми на кнопочку выше &uarr;';
 
@@ -11,53 +13,56 @@ btnWoman.addEventListener('click', () => {
   sectionForWoman.style.display = 'block';
   sectionForHousehold.style.display = 'none';
   header.innerHTML = 'Что подарить любимой даме';
-  showSale();
+  showSale(saleForWomen);
 });
 btnHousehold.addEventListener('click', () => {
   sectionForWoman.style.display = 'none';
   sectionForHousehold.style.display = 'block';
   header.innerHTML = 'Удобную чистоту в каждый дом';
-  showSale();
+  showSale(saleForHousehold);
 });
 
 const ua = 26;
 const byn = 2;
 const sale = 0.85;
 
-function showSale() {
-  if (sale < 1)  document.querySelector('.showSale')
-    .innerHTML = `Цены указаны акционные (-${Math.round((1 - sale)* 100)}%). Время действия ограничено.`
+function showSale(isSale) {
+  const saleTitle = document.querySelector('.showSale');
+  (isSale && sale < 1) ? saleTitle.innerHTML = `Цены указаны акционные
+    (-${Math.round((1 - sale)* 100)}%).
+    Время действия ограничено.` : saleTitle.innerHTML = '';
 }
 
 class Product {
-  constructor(name, price) {
+  constructor(name, price, sale) {
     this.name = name;
     this.price = price;
+    this.sale = sale;
   }
 }
 
 const productList = [
-  new Product('G&H крем', 436.49),
-  new Product('Демакияж', 547.02),
-  new Product('Очищающий скраб', 658.13),
-  new Product('Объемная тушь', 786.35),
-  new Product('Карандаш для губ', 549.86),
-  new Product('G&H гель и молочко', 671.36),
-  new Product('Шампунь + бальзам', 611.83),
-  new Product('Маска для волос', 634.14),
-  new Product('FLORA CHIC', 1554.71),
-  new Product('Парфюмы', 950),
+  new Product('G&H крем', 436.49, saleForWomen),
+  new Product('Демакияж', 547.02, saleForWomen),
+  new Product('Очищающий скраб', 658.13, saleForWomen),
+  new Product('Объемная тушь', 786.35, saleForWomen),
+  new Product('Карандаш для губ', 549.86, saleForWomen),
+  new Product('G&H гель и молочко', 671.36, saleForWomen),
+  new Product('Шампунь + бальзам', 611.83, saleForWomen),
+  new Product('Маска для волос', 634.14, saleForWomen),
+  new Product('FLORA CHIC', 1554.71, saleForWomen),
+  new Product('Парфюмы', 950, saleForWomen),
 
-  new Product('Гель для духовки', 200.73),
-  new Product('LOC универсальный', 194.69),
-  new Product('Dish Drops', 223.96),
+  new Product('Гель для духовки', 200.73, saleForHousehold),
+  new Product('LOC универсальный', 194.69, saleForHousehold),
+  new Product('Dish Drops', 223.96, saleForHousehold),
 ];
 
 for (let i = 0; i < priceTags.length; i++) {
   priceTags[i].innerHTML =
-    `Стоимость: ${(sale < 1) ? '<span style="text-decoration: line-through">'
-      + Math.floor(productList[i].price * 1.2 / ua * byn) + ' руб.</span>' : ''}
-      ${Math.floor(productList[i].price * 1.2 / ua * byn * sale)} руб.`;
+    `${(sale < 1 && productList[i].sale) ? 'Стоимость: <span style="text-decoration: line-through">'
+      + Math.floor(productList[i].price * 1.2 / ua * byn) + ' руб.</span>' + Math.floor(productList[i].price * 1.2 / ua * byn * sale) + ' руб.'
+       : Math.floor(productList[i].price * 1.2 / ua * byn) + 'руб.'}`;
 }
 
 const demoVideoBtns = document.querySelectorAll('.btn-demoVideo');
