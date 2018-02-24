@@ -100,7 +100,7 @@ class Section {
   }
 }
 
-const navButtons = {
+const allSections = {
   forWomen:     new Section({title: 'Для девушки', dom: document.querySelector('.sectionForWoman')}, saleForWomen, 'Что подарить любимой даме', document.querySelector('.forWoman')),
   forHousehold: new Section({title: 'Для дома', dom: document.querySelector('.sectionForHousehold')}, saleForHousehold, 'Удобную чистоту в каждый дом', document.querySelector('.forHousehold')),
   glister:      new Section({title: 'Для зубов', dom: document.querySelector('.sectionGlister')}, saleGlister, 'Чтобы были здоровы зубы', document.querySelector('.glister')),
