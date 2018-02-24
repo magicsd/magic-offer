@@ -92,6 +92,21 @@ nav {
   animation: fadeOpacity 0.4s;
 }
 
+.sectionNutrilite {
+  display: none;
+  animation: fadeOpacity 0.4s;
+}
+
+.article {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin-top: -2rem;
+}
+
+.article p {
+  margin-bottom: 1rem;
+}
+
 .videoBox {
   display: none;
   margin: 3rem 0;

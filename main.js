@@ -11,6 +11,7 @@ const byn = 2;
 const saleForWomen = [true, 0.8];
 const saleForHousehold = [true, 0.9];
 const saleGlister = [true, 0.9];
+const saleNutrilite = [false, 0.9];
 
 class Product {
   constructor(id, section, name, price, video = '') {
@@ -29,6 +30,9 @@ class Product {
       case 'glister':
         this.sale = saleGlister;
         break;
+      case 'nutrilite':
+        this.sale = saleNutrilite;
+        break;
       default:
         this.sale = 'noSection';
     };
@@ -38,7 +42,7 @@ class Product {
     const priceTag = document.querySelector(`#item-${this.id} .priceTag`);
     priceTag.innerHTML = `${this.sale[0] ? 'Стоимость: <span style="text-decoration: line-through">'
       + this.price + ' руб.</span> ' + Math.floor(this.price * this.sale[1]) + ' руб.'
-       : this.price + ' руб.'}`;
+       : 'Стоимость: ' + this.price + ' руб.'}`;
   }
 
   setVideoLink() {
@@ -70,6 +74,10 @@ const productList = [
   new Product(18, 'glister', 'Эликсир', 269.79),
   new Product(19, 'glister', 'Щетки', 253.75),
   new Product(20, 'glister', 'Спрей в рот', 123.15),
+  new Product(21, 'nutrilite', 'Daily', 596.32),
+  new Product(22, 'nutrilite', 'Омега-3', 743.78),
+  new Product(23, 'nutrilite', 'Протеин', 1052.09),
+  new Product(24, 'nutrilite', 'Витамин С+', 426.09),
 ];
 
 for (let i = 0; i < productList.length; i++) {
@@ -94,7 +102,6 @@ class Section {
     for (let el of nav.children) el.removeAttribute('style');
     header.innerHTML = this.header;
     const saleTitle = document.querySelector('.showSale');
-    console.log(this.sale);
     this.sale[0] ? saleTitle.innerHTML = `Цены указаны акционные
         (-${Math.round((1 - this.sale[1])* 100)}%).
         Время действия ограничено.` : saleTitle.innerHTML = '';
@@ -107,4 +114,5 @@ const allSections = {
   forWomen:     new Section({title: 'Для девушки', dom: document.querySelector('.sectionForWoman')}, saleForWomen, 'Что подарить любимой даме', document.querySelector('.forWoman')),
   forHousehold: new Section({title: 'Для дома', dom: document.querySelector('.sectionForHousehold')}, saleForHousehold, 'Удобную чистоту в каждый дом', document.querySelector('.forHousehold')),
   glister:      new Section({title: 'Для зубов', dom: document.querySelector('.sectionGlister')}, saleGlister, 'Чтобы были здоровы зубы', document.querySelector('.glister')),
+  nutrilite:      new Section({title: 'Для здоровья', dom: document.querySelector('.sectionNutrilite')}, saleNutrilite, 'Чтобы были здоровы вы и ваши дети', document.querySelector('.nutrilite')),
 };
