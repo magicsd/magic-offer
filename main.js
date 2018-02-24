@@ -26,7 +26,7 @@ class Product {
       case 'forHousehold':
         this.sale = saleForHousehold;
         break;
-      case 'Glister':
+      case 'glister':
         this.sale = saleGlister;
         break;
       default:
@@ -66,7 +66,10 @@ const productList = [
   new Product(14, 'forHousehold', 'SA8 Premium', 321.39),
   new Product(15, 'forHousehold', 'SA8 Prewash', 245.87),
   new Product(16, 'forHousehold', 'SA8 Отбеливатель 0.5', 217.32),
-  new Product(17, 'Glister', 'Зубная паста', 154.6),
+  new Product(17, 'glister', 'Зубная паста', 154.6),
+  new Product(18, 'glister', 'Эликсир', 269.79),
+  new Product(19, 'glister', 'Щетки', 253.75),
+  new Product(20, 'glister', 'Спрей в рот', 123.15),
 ];
 
 for (let i = 0; i < productList.length; i++) {
