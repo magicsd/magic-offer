@@ -1,19 +1,10 @@
 const priceTags = document.querySelectorAll('.priceTag');
-const btnWoman = document.querySelector('.forWoman');
-const btnMen = document.querySelector('.forMen');
-const btnHousehold = document.querySelector('.forHousehold');
-const btnGlister = document.querySelector('.glister');
-const btnNutrilite = document.querySelector('.nutrilite');
 const sectionForWoman = document.querySelector('.sectionForWoman');
 const sectionForHousehold = document.querySelector('.sectionForHousehold');
 const sectionGlister = document.querySelector('.sectionGlister');
 const header = document.querySelector('.header-text');
 
 header.innerHTML = 'Для кого подарочек? &uarr;';
-
-btnWoman.addEventListener('click', openForWomen);
-btnHousehold.addEventListener('click', openForHousehold);
-btnGlister.addEventListener('click', openGlister);
 
 const ua = 26;
 const byn = 2;
@@ -83,45 +74,34 @@ for (let i = 0; i < productList.length; i++) {
   productList[i].setVideoLink();
 }
 
-// const demoVideoBtns = document.querySelectorAll('.btn-demoVideo');
-//
-// for (let i = 0; i < demoVideoBtns.length; i++)
-// demoVideoBtns[i].addEventListener('click', () => {window.open(productList[10+i].video, '_blank')});
+class Section {
+  constructor(section, sale, header, button) {
+    this.section = section;
+    this.sale = sale;
+    this.header = header;
+    this.button = button;
+    button.addEventListener('click', () => this.showSection());
+    button.innerHTML = section.title;
+  }
 
-function openForWomen() {
-  sectionForWoman.style.display = 'block';
-  sectionForHousehold.style.display = 'none';
-  header.innerHTML = 'Что подарить любимой даме';
-  showSale(saleForWomen);
-  this.setAttribute('style', 'box-shadow: 0 0.5rem 1rem rgba(250, 178, 100, 0.6);');
-  btnHousehold.removeAttribute('style');
-  btnGlister.removeAttribute('style');
+  showSection() {
+    const sections = this.section.dom.parentNode.children;
+    for (let el of sections) el.style.display = 'none';
+    const nav = document.querySelector('nav');
+    for (let el of nav.children) el.removeAttribute('style');
+    header.innerHTML = this.header;
+    const saleTitle = document.querySelector('.showSale');
+    console.log(this.sale);
+    this.sale[0] ? saleTitle.innerHTML = `Цены указаны акционные
+        (-${Math.round((1 - this.sale[1])* 100)}%).
+        Время действия ограничено.` : saleTitle.innerHTML = '';
+    this.section.dom.style.display = 'block';
+    this.button.setAttribute('style', 'box-shadow: 0 0.5rem 1rem rgba(250, 178, 100, 0.6)');
+  }
 }
 
-function openForHousehold() {
-  sectionForWoman.style.display = 'none';
-  sectionForHousehold.style.display = 'block';
-  header.innerHTML = 'Удобную чистоту в каждый дом';
-  showSale(saleForHousehold);
-  this.setAttribute('style', 'box-shadow: 0 0.5rem 1rem rgba(250, 178, 100, 0.6);');
-  btnWoman.removeAttribute('style');
-  btnGlister.removeAttribute('style');
-}
-
-function openGlister() {
-  sectionForWoman.style.display = 'none';
-  sectionForHousehold.style.display = 'none';
-  sectionGlister.style.display = 'block';
-  header.innerHTML = 'Чтобы были здоровы зубы';
-  showSale(saleGlister);
-  this.setAttribute('style', 'box-shadow: 0 0.5rem 1rem rgba(250, 178, 100, 0.6);');
-  btnWoman.removeAttribute('style');
-  btnHousehold.removeAttribute('style');
-}
-
-function showSale(sale) {
-  const saleTitle = document.querySelector('.showSale');
-  sale[0] ? saleTitle.innerHTML = `Цены указаны акционные
-    (-${Math.round((1 - sale[1])* 100)}%).
-    Время действия ограничено.` : saleTitle.innerHTML = '';
-}
+const navButtons = {
+  forWomen:     new Section({title: 'Для девушки', dom: document.querySelector('.sectionForWoman')}, saleForWomen, 'Что подарить любимой даме', document.querySelector('.forWoman')),
+  forHousehold: new Section({title: 'Для дома', dom: document.querySelector('.sectionForHousehold')}, saleForHousehold, 'Удобную чистоту в каждый дом', document.querySelector('.forHousehold')),
+  glister:      new Section({title: 'Для зубов', dom: document.querySelector('.sectionGlister')}, saleGlister, 'Чтобы были здоровы зубы', document.querySelector('.glister')),
+};
