@@ -78,6 +78,7 @@ const productList = [
   new Product(22, 'nutrilite', 'Омега-3', 743.78),
   new Product(23, 'nutrilite', 'Протеин', 1052.09),
   new Product(24, 'nutrilite', 'Витамин С+', 426.09),
+  new Product(25, 'nutrilite', 'Чеснок', 478.61),
 ];
 
 for (let i = 0; i < productList.length; i++) {
