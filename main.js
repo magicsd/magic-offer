@@ -5,6 +5,12 @@ const sectionGlister = document.querySelector('.sectionGlister');
 const header = document.querySelector('.header-text');
 
 header.innerHTML = 'Для кого подарочек? &uarr;';
+document.onscroll = () => {
+  const toTop = document.querySelector('.toTop');
+  (document.documentElement.scrollTop > document.documentElement.clientHeight) ? toTop.style.display = 'block' :
+  toTop.style.display = 'none';
+  toTop.onclick = () => document.documentElement.scrollTop = 0;
+};
 
 const ua = 26;
 const byn = 2;
